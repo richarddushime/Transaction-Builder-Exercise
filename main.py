@@ -41,13 +41,29 @@ def construct_transaction(output_address, value):
 
     return tx.serialize()
 
+# Function to construct a spending transaction
+def construct_spending_transaction(previous_txid, previous_vout, unlocking_script_hex, output_address, value):
+    # Construct transaction
+    tx = Transaction()
+
+    # Add input
+    tx.add_input(previous_txid, previous_vout, unlocking_script_hex)
+
+    # Add output
+    tx.add_output(value, output_address)
+
+    return tx.serialize()
+
 class Transaction:
     def __init__(self):
         self.inputs = []
         self.outputs = []
 
-    def add_input(self, txid, vout):
-        self.inputs.append({'txid': txid, 'vout': vout})
+    def add_input(self, txid, vout, scriptSig=None):
+        input_data = {'txid': txid, 'vout': vout}
+        if scriptSig:
+            input_data['scriptSig'] = scriptSig
+        self.inputs.append(input_data)
 
     def add_output(self, value, address):
         self.outputs.append({'value': value, 'address': address})
@@ -59,6 +75,8 @@ class Transaction:
         serialized += str(len(self.inputs))
         for input in self.inputs:
             serialized += input['txid'] + str(input['vout'])
+            if 'scriptSig' in input:
+                serialized += input['scriptSig']
 
         # Add outputs
         serialized += str(len(self.outputs))
@@ -78,8 +96,26 @@ address = derive_address(redeem_script_hex)
 
 # Construct transaction to send Bitcoins to the address
 transaction_data = construct_transaction(address, 100000)  # Sending 0.001 BTC (in satoshis)
-# Print Results Redirection to Results.txt By using 
-# python3 main.py > Results.txt
+
+print("Initial Transaction Data:")
 print("Redeem Script (hex):", redeem_script_hex)
 print("Derived Address:", address)
 print("Constructed Transaction Data:", transaction_data)
+print()
+
+# Now, let's construct a spending transaction
+# For this example, let's assume the same address is used as the change address
+change_address = address
+
+# Unlocking script - dummy for demonstration
+unlocking_script_hex = "4752210222b23b"  # Dummy unlocking script
+
+# Previous transaction details (to spend from)
+previous_txid = 'previous_txid'  # Replace with actual previous transaction id
+previous_vout = 0  # Replace with actual previous transaction output index
+
+# Construct spending transaction
+spending_transaction_data = construct_spending_transaction(previous_txid, previous_vout, unlocking_script_hex, change_address, 50000)  # Sending 0.0005 BTC (in satoshis) to change address
+
+print("Spending Transaction Data:")
+print("Constructed Spending Transaction Data:", spending_transaction_data)
