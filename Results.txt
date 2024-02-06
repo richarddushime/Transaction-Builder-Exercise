@@ -1,0 +1,3 @@
+Redeem Script (hex): a8427472757374204275696c6465727387
+Derived Address: 38FwbzpG5tSqvvDuicyXj1GZ4NBfSjdpDP
+Constructed Transaction Data: 1dummy_txid0110000038FwbzpG5tSqvvDuicyXj1GZ4NBfSjdpDP
