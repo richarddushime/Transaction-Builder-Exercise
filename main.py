@@ -78,7 +78,8 @@ address = derive_address(redeem_script_hex)
 
 # Construct transaction to send Bitcoins to the address
 transaction_data = construct_transaction(address, 100000)  # Sending 0.001 BTC (in satoshis)
-
+# Print Results Redirection to Results.txt By using 
+# python3 main.py > Results.txt
 print("Redeem Script (hex):", redeem_script_hex)
 print("Derived Address:", address)
 print("Constructed Transaction Data:", transaction_data)
