@@ -1,13 +1,6 @@
 Initial Transaction Data:
 Redeem Script (hex): a8427472757374204275696c6465727387
 Derived Address: 38FwbzpG5tSqvvDuicyXj1GZ4NBfSjdpDP
-Constructed Transaction Data: 1dummy_txid0110000038FwbzpG5tSqvvDuicyXj1GZ4NBfSjdpDP
-
-Spending Transaction Data:
-Constructed Spending Transaction Data: 1previous_txid04752210222b23b15000038FwbzpG5tSqvvDuicyXj1GZ4NBfSjdpDP
-Initial Transaction Data:
-Redeem Script (hex): a8427472757374204275696c6465727387
-Derived Address: 38FwbzpG5tSqvvDuicyXj1GZ4NBfSjdpDP
 Constructed Transaction Data: 1535dfa3634abac4ed004803331f23144dddf5e237539534e524c9f2d9afa44840110000038FwbzpG5tSqvvDuicyXj1GZ4NBfSjdpDP
 
 Spending Transaction Data:
