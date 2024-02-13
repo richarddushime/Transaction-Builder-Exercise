@@ -14,10 +14,10 @@ def derive_address(redeem_script_hex):
     redeem_script_bytes = bytes.fromhex(redeem_script_hex)
     hash160 = RIPEMD160.new(hashlib.sha256(redeem_script_bytes).digest()).digest()
 
-    # Add version byte (0x05 for mainnet)
+    # Adding a version byte (0x05 for mainnet)
     hash160 = b"\x05" + hash160
 
-    # Calculate checksum
+    # Calculating the  checksum
     checksum = hashlib.sha256(hashlib.sha256(hash160).digest()).digest()[:4]
 
     # Append checksum
@@ -34,7 +34,7 @@ def construct_transaction(output_address, value):
     tx = Transaction()
 
     # Add input - Dummy data for demonstration
-    tx.add_input('dummy_txid', 0)
+    tx.add_input('535dfa3634abac4ed004803331f23144dddf5e237539534e524c9f2d9afa4484', 0)
 
     # Add output
     tx.add_output(value, output_address)
@@ -108,10 +108,10 @@ print()
 change_address = address
 
 # Unlocking script - dummy for demonstration
-unlocking_script_hex = "4752210222b23b"  # Dummy unlocking script
+unlocking_script_hex = "00140293308b68f473a15885ab1776674a3a70c77110"  # Dummy unlocking script
 
 # Previous transaction details (to spend from)
-previous_txid = 'previous_txid'  # Replace with actual previous transaction id
+previous_txid = '535dfa3634abac4ed004803331f23144dddf5e237539534e524c9f2d9afa4484011'  # Replace with actual previous transaction id
 previous_vout = 0  # Replace with actual previous transaction output index
 
 # Construct spending transaction
