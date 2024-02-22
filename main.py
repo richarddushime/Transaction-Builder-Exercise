@@ -14,8 +14,8 @@ def derive_address(redeem_script_hex):
     redeem_script_bytes = bytes.fromhex(redeem_script_hex)
     hash160 = RIPEMD160.new(hashlib.sha256(redeem_script_bytes).digest()).digest()
 
-    # Adding a version byte (0x05 for mainnet)
-    hash160 = b"\x05" + hash160
+    # Adding a version byte (0x05 for mainnet) or( 0xC4 for testnet )
+    hash160 = b"\0xEF" + hash160
 
     # Calculating the  checksum
     checksum = hashlib.sha256(hashlib.sha256(hash160).digest()).digest()[:4]
@@ -104,15 +104,15 @@ print("Constructed Transaction Data:", transaction_data)
 print()
 
 # Now, let's construct a spending transaction
-# For this example, let's assume the same address is used as the change address
+#  let's use the same address as the change address
 change_address = address
 
 # Unlocking script - dummy for demonstration
 unlocking_script_hex = "00140293308b68f473a15885ab1776674a3a70c77110"  # Dummy unlocking script
 
 # Previous transaction details (to spend from)
-previous_txid = '535dfa3634abac4ed004803331f23144dddf5e237539534e524c9f2d9afa4484011'  # Replace with actual previous transaction id
-previous_vout = 0  # Replace with actual previous transaction output index
+previous_txid = '535dfa3634abac4ed004803331f23144dddf5e237539534e524c9f2d9afa4484011'  # previous transaction id
+previous_vout = 0  # previous transaction output index
 
 # Construct spending transaction
 spending_transaction_data = construct_spending_transaction(previous_txid, previous_vout, unlocking_script_hex, change_address, 50000)  # Sending 0.0005 BTC (in satoshis) to change address
